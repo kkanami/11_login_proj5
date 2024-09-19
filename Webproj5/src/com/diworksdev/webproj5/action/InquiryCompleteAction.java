@@ -2,18 +2,23 @@ package com.diworksdev.webproj5.action;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
+import org.apache.struts2.interceptor.SessionAware;
 
 import com.diworksdev.webproj5.dao.InquiryCompleteDAO;
 import com.diworksdev.webproj5.dto.InquiryDTO;
 import com.opensymphony.xwork2.ActionSupport;
 
-public class InquiryCompleteAction extends ActionSupport{
+public class InquiryCompleteAction extends ActionSupport implements SessionAware{
 
 	private String name;
 	private String qtype;
 	private String body;
 
-	public List<InquiryDTO>inquiryDTOList=new ArrayList<InquiryDTO>();
+	 List<InquiryDTO>inquiryDTOList=new ArrayList<InquiryDTO>();
+	 private Map<String, Object>session;
+
 
 	public String execute(){
 		String ret=ERROR;
@@ -21,6 +26,7 @@ public class InquiryCompleteAction extends ActionSupport{
 		int count=dao.insert(name, qtype, body);
 		if(count>0){
 			inquiryDTOList=dao.select();
+			session.put("inquiryDTOList", inquiryDTOList);
 			ret=SUCCESS;
 		}
 		return ret;
@@ -48,12 +54,12 @@ public class InquiryCompleteAction extends ActionSupport{
 		this.body=body;
 	}
 
-	public List<InquiryDTO>getInquiryDTOList(){
-		return inquiryDTOList;
+	public Map<String,Object>getSession(){
+		return session;
 	}
 
-	public void setInquiryDTOList(List<InquiryDTO> inquiryDTOList){
-		this.inquiryDTOList=inquiryDTOList;
+	public void setSession(Map<String,Object>session){
+		this.session=session;;
 	}
 
 }
