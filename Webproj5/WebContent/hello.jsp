@@ -20,7 +20,7 @@
 				<th>RESULT</th>
 			</tr>
 
-			<s:iterator value="helloStrutsDTOList">
+			<s:iterator value="#session.helloStrutsDTOList">
 				<tr>
 					<td><s:property value="userId" /></td>
 					<td><s:property value="userName" /></td>

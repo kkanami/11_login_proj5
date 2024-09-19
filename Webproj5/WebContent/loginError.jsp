@@ -25,7 +25,7 @@
 	<th>PASSWORD</th>
 	</tr>
 
-	<s:iterator value="loginDTOList">
+	<s:iterator value="#session.loginDTOList">
 	<tr>
 	<td><s:property value="username"/></td>
 	<td><s:property value="password"/></td>
